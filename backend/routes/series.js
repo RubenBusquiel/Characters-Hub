@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 // CREAR UNA NUEVA SERIE (Global)
 // POST: http://localhost:5000/api/series
 // ==========================================
-router.post('/series', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { nombre, tipo } = req.body;
 
