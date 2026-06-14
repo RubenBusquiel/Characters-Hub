@@ -44,13 +44,38 @@ router.post('/', async (req, res) => {
 // ==========================================
 router.get('/', async (req, res) => {
     try {
-        // .populate trae automáticamente los datos de las otras tablas usando las referencias
         const personajes = await Personaje.find()
             .populate('serie_id', 'nombre tipo')
             .populate('lora');
         res.json(personajes);
     } catch (error) {
         res.status(500).json({ message: 'Error al obtener los personajes', error: error.message });
+    }
+});
+
+// ==========================================
+// ACTUALIZAR UN PERSONAJE (Campos generales o contadores)
+// PUT: http://localhost:5000/api/personajes/:id
+// ==========================================
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const camposAActualizar = req.body;
+
+        // Buscamos y actualizamos el personaje con los datos recibidos
+        const personajeActualizado = await Personaje.findByIdAndUpdate(
+            id,
+            { $set: camposAActualizar },
+            { new: true } // Devuelve el documento modificado
+        ).populate('serie_id', 'nombre tipo').populate('lora');
+
+        if (!personajeActualizado) {
+            return res.status(404).json({ message: 'Personaje no encontrado' });
+        }
+
+        res.json({ message: 'Personaje actualizado con éxito', personaje: personajeActualizado });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar el personaje', error: error.message });
     }
 });
 
