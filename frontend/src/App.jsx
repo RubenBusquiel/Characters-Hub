@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ListaPersonajes from './components/ListaPersonajes';
 import FormularioPersonaje from './components/FormularioPersonaje';
+import FormularioSeries from './components/FormularioSeries';
 //import FormularioMetricas from './components/FormularioMetricas';
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
           <button onClick={() => setVista('nuevo-personaje')} style={{ padding: '8px 16px', borderRadius: '6px', border: 'none', backgroundColor: vista === 'nuevo-personaje' ? '#2e7d32' : '#444', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}>
             + Personaje
           </button>
-          <button onClick={() => setVista('metricas')} style={{ padding: '8px 16px', borderRadius: '6px', border: 'none', backgroundColor: vista === 'metricas' ? '#007bff' : '#444', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}>
-            + Métrica
+          <button onClick={() => setVista('series')} style={{ padding: '8px 16px', borderRadius: '6px', border: 'none', backgroundColor: vista === 'series' ? '#007bff' : '#444', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}>
+            + Serie
           </button>
         </nav>
       </header>
@@ -33,7 +34,7 @@ function App() {
       <main style={{ padding: '20px' }}>
         {vista === 'personajes' && <ListaPersonajes key={actualizarDisparador} />}
         {vista === 'nuevo-personaje' && <FormularioPersonaje alAñadirPersonaje={refrescarLista} />}
-        {vista === 'metricas' && <FormularioMetricas />}
+        {vista === 'series' && <FormularioSeries />}
       </main>
     </div>
   );
